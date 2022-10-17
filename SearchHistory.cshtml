@@ -1,0 +1,65 @@
+﻿@model AirWayTicketBooking.Models.SearchHistory
+
+@{
+    ViewData["Title"] = "SearchHistory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Search</h1>
+
+<hr />
+<div class="row"> 
+    <div class="col-md-4">
+        <form asp-action="SearchResult">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @*<div class="form-group">
+                <label asp-for="TripType" class="control-label"> Trip Type</label>
+                <input  asp-for="TripType" checked="checked" id="SingleTrip" name="TripType" type="radio" value="Single"/>
+                <input  asp-for="TripType" id="RoundTrip" name="TripType"type="radio" value="RoundedTrip" />
+                <input type="radio" checked="checked" id="SingleTrip" name="TripType" value="SingleTrip">
+                  <label for="SingleTrip">Single Trip</label>
+                   <input type="radio" id="RoundTrip" name="TripType" value="RoundTrip">
+                   <label for="RoundTrip">Round Trip</label><br>
+                <span asp-validation-for="TripType" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="FromSource" class="control-label"></label>
+                <input asp-for="FromSource" class="form-control" />
+                <span asp-validation-for="FromSource" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Destination" class="control-label"></label>
+                <input asp-for="Destination" class="form-control" />
+                <span asp-validation-for="Destination" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepatureDate" class="control-label"></label>
+                <input asp-for="DepatureDate" class="form-control" />
+                <span asp-validation-for="DepatureDate" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ReturnTripDate" class="control-label"></label>
+                <input asp-for="ReturnTripDate" class="form-control" />
+                <span asp-validation-for="ReturnTripDate" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <label asp-for="PassengersCount" class="control-label"></label>
+                <input asp-for="PassengersCount" class="form-control" min="1" />
+                <span asp-validation-for="PassengersCount" class="text-danger"></span>
+            </div>
+            <div class="form-group" style="padding-top: 10px;">
+                <input type="submit" value="Search Flights" class="btn btn-success" />
+                <a asp-action="Flight" class="btn btn-primary">Flight List</a>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@*<div>
+    <a asp-action="Flight" class="btn btn-primary">Flight List</a>
+</div>*@
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

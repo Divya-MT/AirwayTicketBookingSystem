@@ -1,0 +1,63 @@
+﻿@model AirWayTicketBooking.Models.Login
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Login</h1>
+
+
+@*<style>
+    body {
+        background-image: url("/Image/image five.jpg");
+    }
+</style>*@
+<hr />
+@*<img src="/Image/image five.jpg" />*@
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Userlogin" asp-controller="User">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="EmailId" class="control-label"></label>
+                <input asp-for="EmailId" class="form-control" />
+                <span asp-validation-for="EmailId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Password" class="control-label"></label>
+                <input asp-for="Password" type="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            @*<div class="form-group">
+            <label asp-for="Id" class="control-label"></label>
+            <select asp-for="Id" class ="form-control" asp-items="ViewBag.Id"></select>
+            </div>*@
+            <div class="form-group" style="padding-top: 10px;">
+                <input type="submit" value="Login" class="btn btn-success" />
+                <a asp-action="Register" class="btn btn-primary">Register Here</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    @*<button class="btn btn-primary" onclick="Register()">Register Here</button>*@
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+    
+}
+@*<script>
+    function Register() {
+       $.ajax({
+                url: '@Url.Action("Register", "User")'
+        });
+    }
+    </script>
+*@

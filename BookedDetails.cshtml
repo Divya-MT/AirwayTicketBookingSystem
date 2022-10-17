@@ -1,0 +1,137 @@
+﻿@model AirWayTicketBooking.Models.Flight
+
+@{
+    ViewData["Title"] = "BookedDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var payments = Model.Payments;
+}
+
+<h1>BookedDetails</h1>
+
+<div>
+    <h4>Flight</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfArriving)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateOfArriving)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateOfDepature)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateOfDepature)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeaveFrom)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeaveFrom)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.GoingTo)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.GoingTo)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Timing)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Timing)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.NoSeatsAvailable)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.NoSeatsAvailable)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rate)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rate)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Tax)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Tax)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Charges)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Charges)
+        </dd>
+    </dl>
+</div>
+@*<div>
+    <a asp-action="Edit" asp-route-id="@Model?.FlightId">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>*@
+<div>
+    <h4>Payment Details</h4>
+    <hr />
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Payment Type
+                </th>
+                <th>
+                    Payment Details
+                </th>
+                <th>
+                    User Name
+                </th>
+                <th>
+                    Passenger Count
+                </th>
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Booked On
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in payments)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaymentDetails)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Payee)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PassengerCount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PaiedOn)
+                    </td>
+                   
+                    <td>
+                        <a class="btn btn-danger" asp-action="Cancel" asp-route-id="@item.Id" asp-route-flightId="@item.FlightId">Cancel</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+<div>
+    <a asp-action="Flight" class="btn btn-primary">Go to Flight List</a>
+    <a asp-action="SearchHistory" class="btn btn-primary">Go to Search</a>
+</div>

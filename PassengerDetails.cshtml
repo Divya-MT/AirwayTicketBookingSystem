@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Http;
+@inject IHttpContextAccessor HttpContextAccessor
+
+@model AirWayTicketBooking.Models.BookingDetail
+
+
+@{
+    ViewData["Title"] = "PassengerDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int? PassengerCount = HttpContextAccessor.HttpContext.Session.GetInt32("PassengerCount");
+    PassengerCount = PassengerCount != null ? PassengerCount : 0;
+    if (PassengerCount > -1)
+            {
+                HttpContextAccessor.HttpContext.Session.SetInt32("PassengerCount", PassengerCount.Value - 1);
+                PassengerCount = PassengerCount - 1;
+            }
+}
+
+<h1>Enter Passenger Details</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+            <form asp-action="PassengerDetails">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="PaymentId" class="control-label"></label>
+                    <input asp-for="PaymentId" class="form-control" value="@ViewBag.PaymentId"/>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PassengerName" class="control-label"></label>
+                    <input asp-for="PassengerName" class="form-control" />
+                    <span asp-validation-for="PassengerName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PassengerAge" class="control-label"></label>
+                    <input asp-for="PassengerAge" class="form-control" min="1" />
+                    <span asp-validation-for="PassengerAge" class="text-danger"></span>
+                </div>
+            <div class="form-group" style="padding-top: 10px;">
+                    <input type="submit" value="Add Passenger" class="btn btn-success" />
+                </div>
+            </form>
+            
+        
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+<script>
+        $(document).ready(function () {
+            $("#PassengerName").val("");
+            $("#PassengerAge").val("");
+        });
+</script>

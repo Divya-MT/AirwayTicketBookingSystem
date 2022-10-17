@@ -1,0 +1,89 @@
+﻿@using AirWayTicketBooking.Models;
+@model IEnumerable<AirWayTicketBooking.Models.Flight>
+
+@{
+    ViewData["Title"] = "Flight";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Flight(s)</h1>
+
+@*<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfArriving)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfDepature)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeaveFrom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GoingTo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Timing)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NoSeatsAvailable)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tax)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Charges)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfArriving)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateOfDepature)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeaveFrom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GoingTo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Timing)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NoSeatsAvailable)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tax)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Charges)
+            </td>
+            <td style="width: 200px;">
+                @*<a asp-action="Edit" asp-route-id="@item.FlightId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.FlightId">Details</a> |*@
+                        <a asp-action="TicketBook" class="btn btn-success" asp-route-id="@item.FlightId" asp-route-bookedseats="@ViewBag.BookedSeat">Book</a>
+                        @if(item.Payments.Any(a=>a.FlightId==item.FlightId))
+                        {
+                            <a asp-action="BookedDetails" class="btn btn-primary" asp-route-id="@item.FlightId">Details</a>
+                        }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
